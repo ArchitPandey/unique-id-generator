@@ -34,6 +34,15 @@ public class UniqueIdGenerator {
         this.epochMillisMask = 2199023255551L;
     }
 
+    /**
+     * @return id
+     * method to generate unique ids. only one thread can
+     * generate unique id at a time.
+     *
+     * id structure -
+     * 1 bit-----41 bits---------------5 bits------------5 bits------------12 bits
+     * 0        epoch in millis     datacenter id       machineid       seq num auto reset every millisec
+     */
     public synchronized UniqueId generateId() {
         //long startTime = System.nanoTime();
 
