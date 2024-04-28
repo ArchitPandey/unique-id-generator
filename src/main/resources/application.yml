@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: unique-id-generator
+
+app:
+  placement:
+    datacenter-num: 1
+    workernode-num: 1
