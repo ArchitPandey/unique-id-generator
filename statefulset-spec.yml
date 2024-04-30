@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: id-generator
+spec:
+  selector:
+    matchLabels:
+      app: id-generator # has to match .spec.template.metadata.labels
+  serviceName: "id-generator-svc"
+  replicas: 3
+  minReadySeconds: 5 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: id-generator # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: id-generator-app
+          image: archit05/unique-id-generator:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATA_CENTER_NUM
+              value: "1"
+            - name: POD_NAME_FULL
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_ORDINAL_PREFIX
+              value: "id-generator-"

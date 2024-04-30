@@ -1,5 +1,6 @@
 package com.example.uniqueidgenerator.service;
 
+import com.example.uniqueidgenerator.model.AppPlacement;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ public class UniqueIdGeneratorTest {
 
     @BeforeEach
     public void setup() {
-        this.idGenerator = new UniqueIdGenerator(1, 1);
+        this.idGenerator = new UniqueIdGenerator(new AppPlacement());
     }
 
     @Test

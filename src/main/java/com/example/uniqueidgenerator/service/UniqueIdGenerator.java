@@ -1,8 +1,8 @@
 package com.example.uniqueidgenerator.service;
 
+import com.example.uniqueidgenerator.model.AppPlacement;
 import com.example.uniqueidgenerator.model.UniqueId;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -23,11 +23,9 @@ public class UniqueIdGenerator {
 
     private long epochMillisMask;
 
-    public UniqueIdGenerator(@Value("${app.placement.datacenter-num}") int datacenterNum,
-                             @Value("${app.placement.workernode-num}") int workerNodeNum
-    ) {
-        this.dcBits = (datacenterNum & 31L ) << 17;
-        this.workerNodeBits = (workerNodeNum & 31L) << 12;
+    public UniqueIdGenerator(AppPlacement appPlacement) {
+        this.dcBits = (appPlacement.getDatacenterNum() & 31L ) << 17;
+        this.workerNodeBits = (appPlacement.getPodOrdinal() & 31L) << 12;
         this.prevEpochMillis = Instant.now().toEpochMilli();
         this.seqNumCurrentVal = 0;
         this.seqNumMask = 4095L;
