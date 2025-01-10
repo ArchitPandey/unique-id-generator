@@ -4,6 +4,7 @@ metadata:
   labels:
     app: id-generator-svc
   name: id-generator-svc
+  namespace: unique-id-generator
 spec:
   ports:
     - name: 8081-8080

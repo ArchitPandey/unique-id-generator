@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: id-generator
+  namespace: unique-id-generator
 spec:
   selector:
     matchLabels:
