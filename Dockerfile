@@ -18,9 +18,9 @@ RUN jlink \
     --no-man-pages \
     --output /myjre
 
-FROM alpine:latest
-ENV JAVA_HOME=/user/java/jdk17
-ENV PATH=$JAVA_HOME/bin:$PATH
+FROM debian:bookworm-slim
+ENV JAVA_HOME /user/java/jdk17
+ENV PATH $JAVA_HOME/bin:$PATH
 COPY --from=build /myjre $JAVA_HOME
 RUN mkdir /project
 COPY --from=build /usr/src/project/target/unique-id-generator-0.0.1-SNAPSHOT.jar /project/

@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: id-generator # has to match .spec.template.metadata.labels
   serviceName: "id-generator-svc"
-  replicas: 3
+  replicas: 1
   minReadySeconds: 5 # by default is 0
   template:
     metadata:
@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: id-generator-app
-          image: archit05/unique-id-generator:1.0.0
+          image: unique-id-generator:1.0
           ports:
             - containerPort: 8080
           env:
@@ -30,3 +30,8 @@ spec:
                   fieldPath: metadata.name
             - name: POD_ORDINAL_PREFIX
               value: "id-generator-"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "300Mi"
