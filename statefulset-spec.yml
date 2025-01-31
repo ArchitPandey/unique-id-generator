@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: id-generator-app
-          image: unique-id-generator:1.0
+          image: archit05/unique-id-generator:1.0
           ports:
             - containerPort: 8080
           env:
